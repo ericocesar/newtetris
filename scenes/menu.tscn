@@ -1,0 +1,380 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfawp2ek1v8q5"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_ejhf2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aayhx"]
+bg_color = Color(0.133333, 0.133333, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.301961, 0.301961, 0.419608, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dh6i"]
+bg_color = Color(0.0588235, 0.0588235, 0.0980392, 0.901961)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.415686, 0.415686, 0.615686, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oeu22"]
+bg_color = Color(0.14902, 0.14902, 0.219608, 0.94902)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.298039, 0.298039, 0.498039, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ejhf2")
+
+[node name="Background" type="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.0588235, 0.0980392, 1)
+
+[node name="GridPattern" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HLines" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line1" type="ColorRect"]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 1280.0
+offset_bottom = 121.0
+color = Color(0.2, 0.2, 0.3, 0.2)
+
+[node name="Line2" type="ColorRect"]
+layout_mode = 0
+offset_top = 240.0
+offset_right = 1280.0
+offset_bottom = 241.0
+color = Color(0.2, 0.2, 0.3, 0.2)
+
+[node name="Line3" type="ColorRect"]
+layout_mode = 0
+offset_top = 360.0
+offset_right = 1280.0
+offset_bottom = 361.0
+color = Color(0.2, 0.2, 0.3, 0.2)
+
+[node name="Line4" type="ColorRect"]
+layout_mode = 0
+offset_top = 480.0
+offset_right = 1280.0
+offset_bottom = 481.0
+color = Color(0.2, 0.2, 0.3, 0.2)
+
+[node name="Line5" type="ColorRect"]
+layout_mode = 0
+offset_top = 600.0
+offset_right = 1280.0
+offset_bottom = 601.0
+color = Color(0.2, 0.2, 0.3, 0.2)
+
+[node name="VLines" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line1" type="ColorRect"]
+layout_mode = 0
+offset_left = 213.0
+offset_right = 214.0
+offset_bottom = 720.0
+color = Color(0.2, 0.2, 0.3, 0.2)
+
+[node name="Line2" type="ColorRect"]
+layout_mode = 0
+offset_left = 426.0
+offset_right = 427.0
+offset_bottom = 720.0
+color = Color(0.2, 0.2, 0.3, 0.2)
+
+[node name="Line3" type="ColorRect"]
+layout_mode = 0
+offset_left = 639.0
+offset_right = 640.0
+offset_bottom = 720.0
+color = Color(0.2, 0.2, 0.3, 0.2)
+
+[node name="Line4" type="ColorRect"]
+layout_mode = 0
+offset_left = 852.0
+offset_right = 853.0
+offset_bottom = 720.0
+color = Color(0.2, 0.2, 0.3, 0.2)
+
+[node name="Line5" type="ColorRect"]
+layout_mode = 0
+offset_left = 1065.0
+offset_right = 1066.0
+offset_bottom = 720.0
+color = Color(0.2, 0.2, 0.3, 0.2)
+
+[node name="TitleLabel" type="Label"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 80.0
+offset_right = 400.0
+offset_bottom = 180.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.996078, 0.913725, 0.996078, 1)
+theme_override_colors/font_shadow_color = Color(0.4, 0.2, 0.8, 0.6)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 72
+text = "TETRIS DUELISTAS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubtitleLabel" type="Label"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 170.0
+offset_right = 400.0
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.686275, 0.686275, 0.882353, 1)
+theme_override_font_sizes/font_size = 24
+text = "Uma batalha intensa de blocos e estratégia!"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -18.0
+offset_right = 150.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="StartButton" type="Button"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_aayhx")
+text = "Iniciar Jogo"
+
+[node name="ControlsButton" type="Button"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_aayhx")
+text = "Controles"
+
+[node name="QuitButton" type="Button"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_aayhx")
+text = "Sair"
+
+[node name="CreatedByLabel" type="Label"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -176.0
+offset_top = -40.0
+offset_right = 176.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.67451, 0.67451, 0.8, 0.666667)
+text = "Criado com Godot Engine"
+horizontal_alignment = 1
+
+[node name="ControlsPanel" type="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -250.0
+offset_right = 350.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3dh6i")
+
+[node name="TitleLabel" type="Label"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -110.0
+offset_top = 20.0
+offset_right = 110.0
+offset_bottom = 69.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.996078, 0.929412, 0.996078, 1)
+theme_override_font_sizes/font_size = 36
+text = "CONTROLES"
+horizontal_alignment = 1
+
+[node name="ControlsContainer" type="VBoxContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player1Label" type="Label"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.368627, 0.756863, 0.964706, 1)
+theme_override_font_sizes/font_size = 24
+text = "Jogador 1:"
+horizontal_alignment = 1
+
+[node name="Player1Controls" type="RichTextLabel"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.839216, 0.839216, 0.839216, 1)
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[center]
+WASD: Mover peça (W para rotar)
+Espaço: Queda rápida
+Q: Usar power-up
+[/center]"
+fit_content = true
+
+[node name="HSeparator" type="HSeparator"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Player2Label" type="Label"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.952941, 0.462745, 0.419608, 1)
+theme_override_font_sizes/font_size = 24
+text = "Jogador 2:"
+horizontal_alignment = 1
+
+[node name="Player2Controls" type="RichTextLabel"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.839216, 0.839216, 0.839216, 1)
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[center]
+Setas: Mover peça (Cima para rotar)
+Enter: Queda rápida
+Shift: Usar power-up
+[/center]"
+fit_content = true
+
+[node name="HSeparator2" type="HSeparator"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PowerUpsTitle" type="Label"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.831373, 0.745098, 0.356863, 1)
+theme_override_font_sizes/font_size = 24
+text = "Power-Ups:"
+horizontal_alignment = 1
+
+[node name="PowerUpsDesc" type="RichTextLabel"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.839216, 0.839216, 0.839216, 1)
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[center]
+Complete linhas para acumular pontos de poder.
+Use a tecla especial para lançar um power-up contra seu oponente!
+[/center]"
+fit_content = true
+
+[node name="Panel" type="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -80.0
+offset_right = 250.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_oeu22")
+
+[node name="BackButton" type="Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -20.0
+offset_right = 60.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Voltar" 

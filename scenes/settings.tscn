@@ -1,0 +1,603 @@
+[gd_scene load_steps=11 format=3 uid="uid://cye2hmf7yfm3b"]
+
+[ext_resource type="Script" path="res://scripts/settings.gd" id="1_o1u05"]
+[ext_resource type="Script" path="res://scripts/game_theme.gd" id="2_oj7a2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0a3gg"]
+bg_color = Color(0.0588235, 0.0627451, 0.207843, 0.901961)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.207843, 0.517647, 0.894118, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhs7f"]
+bg_color = Color(0.129412, 0.141176, 0.309804, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.6, 0.858824, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0wda"]
+bg_color = Color(0.0588235, 0.0627451, 0.207843, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.282353, 0.733333, 0.909804, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06m0s"]
+bg_color = Color(0.129412, 0.141176, 0.309804, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.207843, 0.517647, 0.894118, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0dvw"]
+bg_color = Color(0.0588235, 0.0627451, 0.207843, 0.392157)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.282353, 0.733333, 0.909804, 0.392157)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5unh"]
+bg_color = Color(0.282353, 0.733333, 0.909804, 0.301961)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.282353, 0.733333, 0.909804, 0.501961)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5o58"]
+bg_color = Color(0.207843, 0.517647, 0.894118, 0.627451)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.207843, 0.517647, 0.894118, 0.878431)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65k0e"]
+bg_color = Color(0.0588235, 0.0627451, 0.207843, 0.392157)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o1u05")
+
+[node name="MainPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0a3gg")
+
+[node name="TitleLabel" type="Label" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "CONFIGURAÇÕES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = -20.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jhs7f")
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_h0wda")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_06m0s")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_m0dvw")
+theme_override_styles/tab_disabled = SubResource("StyleBoxFlat_l5unh")
+theme_override_styles/tab_focus = SubResource("StyleBoxFlat_a5o58")
+
+[node name="Áudio" type="Control" parent="MainPanel/TabContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainPanel/TabContainer/Áudio"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/TabContainer/Áudio/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="MusicSection" type="VBoxContainer" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/MusicSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Volume da Música"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/MusicSection"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MusicSlider" type="HSlider" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/MusicSection/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.8
+
+[node name="MusicValueLabel" type="Label" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/MusicSection/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "80%"
+horizontal_alignment = 2
+
+[node name="MusicMuteCheckBox" type="CheckBox" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/MusicSection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Silenciar Música"
+
+[node name="HSeparator" type="HSeparator" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxFlat_65k0e")
+
+[node name="SFXSection" type="VBoxContainer" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/SFXSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Volume de Efeitos Sonoros"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/SFXSection"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SFXSlider" type="HSlider" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/SFXSection/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXValueLabel" type="Label" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/SFXSection/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "100%"
+horizontal_alignment = 2
+
+[node name="SFXMuteCheckBox" type="CheckBox" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/SFXSection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Silenciar Efeitos"
+
+[node name="HSeparator2" type="HSeparator" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxFlat_65k0e")
+
+[node name="UISection" type="VBoxContainer" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/UISection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Volume da Interface"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/UISection"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="UISlider" type="HSlider" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/UISection/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.9
+
+[node name="UIValueLabel" type="Label" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/UISection/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "90%"
+horizontal_alignment = 2
+
+[node name="UIMuteCheckBox" type="CheckBox" parent="MainPanel/TabContainer/Áudio/ScrollContainer/VBoxContainer/UISection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Silenciar Interface"
+
+[node name="Controles" type="Control" parent="MainPanel/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainPanel/TabContainer/Controles"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/TabContainer/Controles/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="Player1Section" type="VBoxContainer" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Jogador 1"
+
+[node name="GridContainer" type="GridContainer" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="MoveLeftLabel" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mover para Esquerda:"
+
+[node name="MoveLeftButton" type="Button" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "A"
+
+[node name="MoveRightLabel" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mover para Direita:"
+
+[node name="MoveRightButton" type="Button" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "D"
+
+[node name="RotateLabel" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Rotacionar:"
+
+[node name="RotateButton" type="Button" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "W"
+
+[node name="SoftDropLabel" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Queda Suave:"
+
+[node name="SoftDropButton" type="Button" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "S"
+
+[node name="HardDropLabel" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Queda Rápida:"
+
+[node name="HardDropButton" type="Button" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Espaço"
+
+[node name="PowerUpLabel" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Usar Power-Up:"
+
+[node name="PowerUpButton" type="Button" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player1Section/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "E"
+
+[node name="HSeparator" type="HSeparator" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxFlat_65k0e")
+
+[node name="Player2Section" type="VBoxContainer" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Jogador 2"
+
+[node name="GridContainer" type="GridContainer" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="MoveLeftLabel" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mover para Esquerda:"
+
+[node name="MoveLeftButton2" type="Button" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seta Esquerda"
+
+[node name="MoveRightLabel" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mover para Direita:"
+
+[node name="MoveRightButton2" type="Button" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seta Direita"
+
+[node name="RotateLabel" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Rotacionar:"
+
+[node name="RotateButton2" type="Button" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seta Cima"
+
+[node name="SoftDropLabel" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Queda Suave:"
+
+[node name="SoftDropButton2" type="Button" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seta Baixo"
+
+[node name="HardDropLabel" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Queda Rápida:"
+
+[node name="HardDropButton2" type="Button" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Enter"
+
+[node name="PowerUpLabel" type="Label" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Usar Power-Up:"
+
+[node name="PowerUpButton2" type="Button" parent="MainPanel/TabContainer/Controles/ScrollContainer/VBoxContainer/Player2Section/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shift"
+
+[node name="Visual" type="Control" parent="MainPanel/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainPanel/TabContainer/Visual"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/TabContainer/Visual/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="EffectsSection" type="VBoxContainer" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer/EffectsSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Efeitos Visuais"
+
+[node name="ParticlesCheckBox" type="CheckBox" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer/EffectsSection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mostrar Partículas"
+
+[node name="AnimationsCheckBox" type="CheckBox" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer/EffectsSection"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "Animações"
+
+[node name="HSeparator" type="HSeparator" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxFlat_65k0e")
+
+[node name="AccessibilitySection" type="VBoxContainer" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer/AccessibilitySection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Acessibilidade"
+
+[node name="HighContrastCheckBox" type="CheckBox" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer/AccessibilitySection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Alto Contraste"
+
+[node name="ColorblindModeCheckBox" type="CheckBox" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer/AccessibilitySection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Modo Daltônico"
+
+[node name="HSeparator2" type="HSeparator" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxFlat_65k0e")
+
+[node name="FontSizeSection" type="VBoxContainer" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer/FontSizeSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Tamanho da Fonte"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer/FontSizeSection"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FontSizeSlider" type="HSlider" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer/FontSizeSection/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.8
+max_value = 1.5
+step = 0.05
+value = 1.0
+
+[node name="FontSizeValueLabel" type="Label" parent="MainPanel/TabContainer/Visual/ScrollContainer/VBoxContainer/FontSizeSection/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "100%"
+horizontal_alignment = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -60.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="ResetButton" type="Button" parent="MainPanel/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Redefinir para Padrão"
+
+[node name="Spacer" type="Control" parent="MainPanel/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="ApplyButton" type="Button" parent="MainPanel/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Aplicar"
+
+[node name="BackButton" type="Button" parent="MainPanel/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Voltar" 
