@@ -1,0 +1,22 @@
+types {
+    text/html                             html htm shtml;
+    text/css                              css;
+    text/xml                              xml;
+    application/javascript                js;
+    application/wasm                      wasm;
+    application/octet-stream              pck;
+    application/json                      json;
+    image/jpeg                            jpeg jpg;
+    image/png                             png;
+    image/gif                             gif;
+    image/svg+xml                         svg svgz;
+    image/webp                            webp;
+    image/x-icon                          ico;
+    font/woff                             woff;
+    font/woff2                            woff2;
+    application/x-font-ttf                ttf;
+    audio/mpeg                            mp3;
+    audio/ogg                             ogg;
+    video/mp4                             mp4;
+    video/webm                            webm;
+} 

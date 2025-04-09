@@ -19,6 +19,10 @@ touch /var/log/nginx/error.log
 touch /var/log/nginx/access.log
 chmod 755 /var/log/nginx
 
+# Garantir que o diretório web existe e tem permissões corretas
+mkdir -p /var/www/html
+chmod -R 755 /var/www/html
+
 # Substituir a porta no arquivo de configuração do nginx
 sed -i "s/listen 80/listen $PORT/g" /etc/nginx/conf.d/default.conf
 sed -i "s/listen \[::\]:80/listen \[::\]:$PORT/g" /etc/nginx/conf.d/default.conf
@@ -43,9 +47,24 @@ echo "======== CONTEÚDO DO DIRETÓRIO WEB ========"
 ls -la /var/www/html/
 echo "==========================================="
 
+# Verificar informações dos arquivos críticos
+echo "======== INFORMAÇÕES DOS ARQUIVOS WASM ========"
+file /var/www/html/*.wasm || echo "Arquivo WASM não encontrado"
+echo "=============================================="
+
+# Verificar tipos MIME configurados
+echo "======== TIPOS MIME CONFIGURADOS ========"
+grep -r "application/wasm" /etc/nginx/
+echo "========================================"
+
 # Verificar se temos todos os arquivos necessários
 if [ ! -f /var/www/html/index.html ]; then
     echo "ERRO: Arquivo index.html não encontrado!"
+    exit 1
+fi
+
+if [ ! -f /var/www/html/index.wasm ]; then
+    echo "ERRO: Arquivo index.wasm não encontrado!"
     exit 1
 fi
 
@@ -54,13 +73,24 @@ echo "Ajustando permissões..."
 chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html
 
+# Configurar permissões específicas para WASM
+echo "Configurando permissões específicas para WASM..."
+chmod 644 /var/www/html/*.wasm
+chmod 644 /var/www/html/*.pck
+chmod 644 /var/www/html/*.js
+
+# Verificar conteúdo do index.html
+echo "======== CONTEÚDO DO INDEX.HTML ========"
+grep -i wasm /var/www/html/index.html || echo "Nenhuma referência a WASM encontrada no index.html"
+echo "========================================"
+
 # Verificar se o nginx está configurado corretamente
 echo "Verificando configuração do Nginx..."
 nginx -t || exit 1
 
 # Verificar quais processos estão usando as portas relevantes
 echo "======== PORTAS EM USO ========"
-netstat -tulpn | grep -E ':(80|443|8080)'
+netstat -tulpn | grep -E ":(80|443|$PORT)"
 echo "=============================="
 
 # Iniciar nginx em primeiro plano
