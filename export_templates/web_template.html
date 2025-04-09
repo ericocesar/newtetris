@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>$GODOT_PROJECT_NAME</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            touch-action: none;
+            background-color: #0F1035;
+            color: white;
+            font-family: 'Courier New', monospace;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #canvas {
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            border-radius: 6px;
+            border: 2px solid #0adde9;
+        }
+
+        #status {
+            color: #ddd;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        #status-description {
+            color: #00ffff;
+            margin-top: 5px;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        #load-progress {
+            width: 300px;
+            height: 20px;
+            margin-top: 10px;
+            position: relative;
+            background-color: "$GODOT_PROGRESS_BAR_EMPTY";
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #load-progress span {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background-color: "$GODOT_PROGRESS_BAR_FULL";
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        #tetris-blocks {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tetris-block {
+            width: 30px;
+            height: 30px;
+            margin: 0 5px;
+            border-radius: 4px;
+        }
+
+        .i-block { background-color: #00FFFF; }
+        .j-block { background-color: #0000FF; }
+        .l-block { background-color: #FF8000; }
+        .o-block { background-color: #FFFF00; }
+        .t-block { background-color: #800080; }
+
+        #title {
+            margin-bottom: 15px;
+            font-size: 36px;
+            color: #FF5050;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-top: 0;
+        }
+
+        #controls {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #00FFFF;
+        }
+
+        #show-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            border: 1px solid #00FFFF;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #show-controls:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        @media (max-width: 600px) {
+            #canvas {
+                width: 95vw;
+                height: auto;
+            }
+        }
+    </style>
+    $GODOT_HEAD_INCLUDE
+</head>
+<body>
+    <div id="container">
+        <div id="title">TETRIS DUELISTAS</div>
+        <div id="tetris-blocks">
+            <div class="tetris-block i-block"></div>
+            <div class="tetris-block j-block"></div>
+            <div class="tetris-block l-block"></div>
+            <div class="tetris-block o-block"></div>
+            <div class="tetris-block t-block"></div>
+        </div>
+        <canvas id="canvas">
+            HTML5 canvas is not supported.
+        </canvas>
+        <div id="status">
+            <div id="status-progress">
+                <div id="load-progress"><span></span></div>
+            </div>
+            <div id="status-description">Carregando...</div>
+        </div>
+    </div>
+    <button id="show-controls">Controles</button>
+    <div id="controls">
+        <h3>JOGADOR 1</h3>
+        <p>A/D - Mover Esquerda/Direita</p>
+        <p>S - Queda Suave</p>
+        <p>W - Queda Rápida</p>
+        <p>Q/E - Rotacionar</p>
+        <p>Espaço - Guardar Peça</p>
+        
+        <h3>JOGADOR 2</h3>
+        <p>←/→ - Mover Esquerda/Direita</p>
+        <p>↓ - Queda Suave</p>
+        <p>↑ - Queda Rápida</p>
+        <p>PageUp/Del - Rotacionar</p>
+        <p>Shift - Guardar Peça</p>
+    </div>
+    <script>
+        var showControlsButton = document.getElementById('show-controls');
+        var controlsPanel = document.getElementById('controls');
+        
+        showControlsButton.addEventListener('click', function() {
+            if (controlsPanel.style.display === 'block') {
+                controlsPanel.style.display = 'none';
+            } else {
+                controlsPanel.style.display = 'block';
+            }
+        });
+
+        var statusProgress = document.getElementById('load-progress').querySelector('span');
+        var statusDescription = document.getElementById('status-description');
+        var canvas = document.getElementById('canvas');
+        var container = document.getElementById('container');
+
+        // Display loading progress
+        function displayLoadingProgress(progress) {
+            statusProgress.style.width = progress * 100 + '%';
+            if (progress === 1) {
+                setTimeout(function() {
+                    document.getElementById('status').style.display = 'none';
+                    document.getElementById('tetris-blocks').style.display = 'none';
+                    document.getElementById('title').style.display = 'none';
+                }, 500);
+            }
+        }
+    </script>
+    $GODOT_SCRIPT
+</body>
+</html> 

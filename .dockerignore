@@ -1,0 +1,48 @@
+# Godot project files
+.godot/
+.github/
+.import/
+.git/
+.gitignore
+.gitattributes
+*.translation
+*.~
+.mono/
+data_*/
+mono_crash.*.json
+
+# Godot build artifacts
+*.o
+*.os
+*.so
+*.obj
+*.bc
+*.pyc
+*.dblite
+*.pdb
+*.lib
+*.res
+*.iobj
+*.ipdb
+*.dll
+*.exe
+*.dylib
+
+# System files
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+.directory
+*~
+*.swp
+*.swo
+
+# Project specific
+README.md
+docs/
+tests/
+screenshots/
+.vscode/ 

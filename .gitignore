@@ -1,0 +1,44 @@
+# Godot-specific ignores
+.godot/
+.import/
+export/
+export_presets.cfg.bak
+*.translation
+*.~
+.mono/
+data_*/
+mono_crash.*.json
+
+# Binaries
+*.o
+*.os
+*.so
+*.obj
+*.bc
+*.pyc
+*.dblite
+*.pdb
+*.pck
+*.d
+*.exp
+*.lib
+*.res
+*.iobj
+*.ipdb
+*.dll
+*.exe
+*.dylib
+
+# System/tool-specific ignores
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+.directory
+*~
+*.swp
+*.swo
+*.bak
+.vscode/ 

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Duelistas - Erro do Servidor</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #0F1035;
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            border: 2px solid #00FFFF;
+            box-shadow: 0 0 20px #00FFFF;
+        }
+        h1 {
+            font-size: 36px;
+            color: #FF5050;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .grid {
+            display: inline-grid;
+            grid-template-columns: repeat(5, 30px);
+            grid-gap: 3px;
+            margin: 30px 0;
+        }
+        .block {
+            width: 30px;
+            height: 30px;
+            border-radius: 3px;
+            animation: fall 2s infinite;
+        }
+        .block:nth-child(1) { background-color: #00FFFF; animation-delay: 0.1s; }
+        .block:nth-child(2) { background-color: #0000FF; animation-delay: 0.2s; }
+        .block:nth-child(3) { background-color: #FF8000; animation-delay: 0.3s; }
+        .block:nth-child(4) { background-color: #FFFF00; animation-delay: 0.4s; }
+        .block:nth-child(5) { background-color: #800080; animation-delay: 0.5s; }
+        .block:nth-child(6) { background-color: #FF0000; animation-delay: 0.6s; }
+        .block:nth-child(7) { background-color: #00FF00; animation-delay: 0.7s; }
+        .block:nth-child(8) { background-color: #FF00FF; animation-delay: 0.8s; }
+        .block:nth-child(9) { background-color: #00FFFF; animation-delay: 0.9s; }
+        .block:nth-child(10) { background-color: #0000FF; animation-delay: 1.0s; }
+        
+        @keyframes fall {
+            0% { transform: translateY(-20px); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(20px); opacity: 0; }
+        }
+        
+        .return-btn {
+            background-color: #FF5050;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .return-btn:hover {
+            background-color: #FF3030;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ERRO DO SERVIDOR</h1>
+        <p>Algo deu errado no servidor!</p>
+        <div class="grid">
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+        </div>
+        <p>Parece que nosso tabuleiro de Tetris está passando por alguns problemas técnicos. Por favor, tente novamente mais tarde.</p>
+        <p><strong>Erro:</strong> 50x</p>
+        <a href="/" class="return-btn">Tentar Novamente</a>
+    </div>
+</body>
+</html> 

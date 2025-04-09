@@ -1,206 +1,305 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+    <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp">
     <title>Tetris Duelistas</title>
-    <meta name="description" content="Um jogo competitivo de Tetris para dois jogadores">
-    
-    <!-- Estilos para a tela de carregamento -->
     <style>
-        :root {
-            --primary-color: #0F1035;
-            --secondary-color: #365486;
-            --accent-color: #7FC7D9;
-            --text-color: #DCF2F1;
-        }
-        
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            font-family: 'Arial', sans-serif;
+            background-color: #0F1035;
+            color: white;
+            font-family: sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            height: 100vh;
+            align-items: center;
+            min-height: 100vh;
             overflow: hidden;
         }
-        
-        #loading-screen {
+        #canvas {
+            display: block;
+            width: 100%;
+            height: 100vh;
+            max-width: 100vw;
+            max-height: 100vh;
+            object-fit: contain;
+        }
+        #canvas:focus {
+            outline: none;
+        }
+        #status {
             position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 10;
+        }
+        .godot {
+            font-size: 18px;
+            color: #eeeeee;
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+        }
+        #status-progress {
+            width: 300px;
+            height: 20px;
+            background-color: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        #status-progress-inner {
+            height: 100%;
+            width: 0;
+            background-color: #00FFFF;
+            border-radius: 10px;
+            transition: width 0.2s ease-in-out;
+        }
+        .spinner {
+            height: 64px;
+            width: 64px;
+            animation: rotate 2s linear infinite;
+            transform-origin: center center;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+        .spinner .path {
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+            stroke: #00FFFF;
+            animation: dash 1.5s ease-in-out infinite;
+            stroke-linecap: round;
+        }
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes dash {
+            0% {
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+            }
+            50% {
+                stroke-dasharray: 89, 200;
+                stroke-dashoffset: -35px;
+            }
+            100% {
+                stroke-dasharray: 89, 200;
+                stroke-dashoffset: -124px;
+            }
+        }
+
+        /* Adiciona blocos de Tetris no fundo durante o carregamento */
+        .tetris-bg {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--primary-color);
-            z-index: 100;
-            transition: opacity 0.5s ease-out;
-        }
-        
-        #loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .game-title {
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            text-shadow: 0 0 10px var(--accent-color);
-        }
-        
-        .loading-blocks {
-            display: flex;
-            margin-bottom: 2rem;
-        }
-        
-        .tetris-block {
-            width: 30px;
-            height: 30px;
-            margin: 0 5px;
-            border-radius: 4px;
-            animation: pulse 1.5s infinite alternate;
-        }
-        
-        .tetris-block:nth-child(1) {
-            background-color: #00FFFF; /* I */
-            animation-delay: 0s;
-        }
-        
-        .tetris-block:nth-child(2) {
-            background-color: #0000FF; /* J */
-            animation-delay: 0.2s;
-        }
-        
-        .tetris-block:nth-child(3) {
-            background-color: #FF8000; /* L */
-            animation-delay: 0.4s;
-        }
-        
-        .tetris-block:nth-child(4) {
-            background-color: #FFFF00; /* O */
-            animation-delay: 0.6s;
-        }
-        
-        .tetris-block:nth-child(5) {
-            background-color: #00FF00; /* S */
-            animation-delay: 0.8s;
-        }
-        
-        .tetris-block:nth-child(6) {
-            background-color: #800080; /* T */
-            animation-delay: 1.0s;
-        }
-        
-        .tetris-block:nth-child(7) {
-            background-color: #FF0000; /* Z */
-            animation-delay: 1.2s;
-        }
-        
-        .loading-status {
-            font-size: 1.2rem;
-            margin-top: 1rem;
-        }
-        
-        .progress-container {
-            width: 300px;
-            height: 20px;
-            background-color: var(--secondary-color);
-            border-radius: 10px;
+            z-index: -1;
             overflow: hidden;
-            margin-top: 1rem;
         }
-        
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background-color: var(--accent-color);
-            border-radius: 10px;
-            transition: width 0.3s ease;
+        .tetris-block {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 3px;
+            opacity: 0.3;
+            animation: fall linear forwards;
         }
-        
-        #canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-10px) scale(1.1);
-                opacity: 1;
-            }
-        }
-        
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .game-title {
-                font-size: 2rem;
-            }
-            
-            .tetris-block {
-                width: 20px;
-                height: 20px;
-            }
-            
-            .progress-container {
-                width: 250px;
-            }
+        @keyframes fall {
+            from { transform: translateY(-50px); }
+            to { transform: translateY(100vh); }
         }
     </style>
 </head>
 <body>
-    <!-- Tela de carregamento -->
-    <div id="loading-screen">
-        <h1 class="game-title">Tetris Duelistas</h1>
-        <div class="loading-blocks">
-            <div class="tetris-block"></div>
-            <div class="tetris-block"></div>
-            <div class="tetris-block"></div>
-            <div class="tetris-block"></div>
-            <div class="tetris-block"></div>
-            <div class="tetris-block"></div>
-            <div class="tetris-block"></div>
-        </div>
-        <div class="loading-status">Carregando... <span id="progress-text">0%</span></div>
-        <div class="progress-container">
-            <div class="progress-bar" id="progress-bar"></div>
-        </div>
-    </div>
+    <div class="tetris-bg" id="tetris-bg"></div>
     
-    <!-- Elemento Canvas para o jogo -->
     <canvas id="canvas"></canvas>
     
-    <!-- Scripts Godot -->
-    <script src="$GODOT_URL"></script>
-    <script>
-        // Configuração do Godot Engine
-        const engine = new Engine($ENGINE_CONFIG);
-        
-        // Atualizar a barra de progresso durante o carregamento
-        engine.startGame({
-            onProgress: function(current, total) {
-                const percent = Math.floor((current / total) * 100);
-                document.getElementById('progress-bar').style.width = percent + '%';
-                document.getElementById('progress-text').textContent = percent + '%';
+    <div id="status">
+        <div id="status-progress" style="display: none;" oncontextmenu="event.preventDefault();">
+            <div id="status-progress-inner"></div>
+        </div>
+        <div id="status-indeterminate" style="display: none;" oncontextmenu="event.preventDefault();">
+            <svg class="spinner" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"></circle>
+            </svg>
+        </div>
+        <div id="status-notice" class="godot" style="display: none;"></div>
+    </div>
+
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript">//<![CDATA[
+        // Criar blocos de Tetris no fundo
+        function createTetrisBackground() {
+            const bg = document.getElementById('tetris-bg');
+            const colors = ['#00FFFF', '#0000FF', '#FFA500', '#FFFF00', '#00FF00', '#800080', '#FF0000'];
+            const screenWidth = window.innerWidth;
+            
+            for (let i = 0; i < 20; i++) {
+                const block = document.createElement('div');
+                block.className = 'tetris-block';
                 
-                if (current === total) {
-                    setTimeout(() => {
-                        document.getElementById('loading-screen').classList.add('hidden');
-                    }, 1000);
+                // Posição aleatória
+                const left = Math.random() * screenWidth;
+                block.style.left = `${left}px`;
+                block.style.top = `${Math.random() * -500}px`;
+                
+                // Cor aleatória
+                block.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Velocidade aleatória (entre 10 e 30 segundos)
+                const duration = 10 + Math.random() * 20;
+                block.style.animationDuration = `${duration}s`;
+                
+                // Atrasa o início da animação
+                block.style.animationDelay = `${Math.random() * 5}s`;
+                
+                bg.appendChild(block);
+                
+                // Recria o bloco quando a animação terminar
+                block.addEventListener('animationend', function() {
+                    block.style.top = `${Math.random() * -100}px`;
+                    block.style.left = `${Math.random() * screenWidth}px`;
+                    block.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    // Remove e readiciona o elemento para reiniciar a animação
+                    this.remove();
+                    setTimeout(() => bg.appendChild(block), 0);
+                });
+            }
+        }
+        
+        // Iniciar o fundo de Tetris
+        createTetrisBackground();
+        
+        // Recalcular o fundo quando a janela for redimensionada
+        window.addEventListener('resize', function() {
+            document.getElementById('tetris-bg').innerHTML = '';
+            createTetrisBackground();
+        });
+
+        const GODOT_CONFIG = {"canvasResizePolicy":2,"executable":"index","experimentalVK":false,"focusCanvas":true};
+        var engine = new Engine(GODOT_CONFIG);
+
+        (function() {
+            const INDETERMINATE_STATUS_STEP_MS = 100;
+            const statusProgress = document.getElementById("status-progress");
+            const statusProgressInner = document.getElementById("status-progress-inner");
+            const statusIndeterminate = document.getElementById("status-indeterminate");
+            const statusNotice = document.getElementById("status-notice");
+
+            let initializing = true;
+            let statusMode = "hidden";
+
+            let animationCallbacks = [];
+            function animate(time) {
+                animationCallbacks.forEach((callback) => callback(time));
+                requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+
+            function setStatusMode(mode) {
+                if (statusMode === mode || !initializing) {
+                    return;
+                }
+                [statusProgress, statusIndeterminate, statusNotice].forEach((elem) => {
+                    elem.style.display = "none";
+                });
+                animationCallbacks = animationCallbacks.filter(function(value) {
+                    return (value !== animateStatusIndeterminate);
+                });
+                switch (mode) {
+                    case "progress":
+                        statusProgress.style.display = "block";
+                        break;
+                    case "indeterminate":
+                        statusIndeterminate.style.display = "block";
+                        animationCallbacks.push(animateStatusIndeterminate);
+                        break;
+                    case "notice":
+                        statusNotice.style.display = "block";
+                        break;
+                    case "hidden":
+                        break;
+                    default:
+                        throw new Error("Invalid status mode");
+                }
+                statusMode = mode;
+            }
+
+            function animateStatusIndeterminate(ms) {
+                const i = Math.floor((ms / INDETERMINATE_STATUS_STEP_MS) % 8);
+                if (statusIndeterminate.children[i].style.borderTopColor === "") {
+                    Array.prototype.slice.call(statusIndeterminate.children).forEach((child) => {
+                        child.style.borderTopColor = "";
+                    });
+                    statusIndeterminate.children[i].style.borderTopColor = "#dfdfdf";
                 }
             }
-        });
-    </script>
+
+            function setStatusNotice(text) {
+                while (statusNotice.lastChild) {
+                    statusNotice.removeChild(statusNotice.lastChild);
+                }
+                const lines = text.split("\n");
+                lines.forEach((line) => {
+                    statusNotice.appendChild(document.createTextNode(line));
+                    statusNotice.appendChild(document.createElement("br"));
+                });
+            }
+
+            engine.setProgressFunc((current, total) => {
+                if (total > 0) {
+                    statusProgressInner.style.width = `${current / total * 100}%`;
+                    setStatusMode("progress");
+                    if (current === total) {
+                        setTimeout(() => {
+                            setStatusMode("indeterminate");
+                        }, 500);
+                    }
+                } else {
+                    setStatusMode("indeterminate");
+                }
+            });
+
+            engine.setOnExecute(() => {
+                setStatusMode("hidden");
+                initializing = false;
+                document.getElementById('tetris-bg').style.display = 'none';
+            });
+
+            engine.setOnExit((status) => {
+                setStatusNotice(`O jogo travou com status: ${status}\nPor favor, recarregue a página.`);
+                setStatusMode("notice");
+                initializing = false;
+            });
+
+            setStatusMode("indeterminate");
+            setStatusNotice("Carregando Tetris Duelistas...");
+            
+            // Iniciar o jogo
+            engine.startGame();
+        }());
+    //]]></script>
 </body>
 </html> 
