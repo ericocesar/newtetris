@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     nginx \
     curl \
+    net-tools \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Instalar Godot (headless)
@@ -37,9 +38,12 @@ RUN mkdir -p /root/.local/share/godot/export_templates/4.2.stable/ \
 WORKDIR /app
 COPY . .
 
-# Exportar o projeto para web
+# Exportar o projeto para web - garantindo que todas as opções necessárias estejam habilitadas
 RUN mkdir -p /var/www/html/
 RUN godot --headless --export-debug "Web" /var/www/html/index.html
+
+# Verificar o conteúdo da pasta exportada
+RUN ls -la /var/www/html/
 
 # Configurar nginx - remover configurações padrão para evitar conflitos
 RUN rm -rf /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
@@ -50,8 +54,8 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Script de inicialização para ajustar porta e outras configurações em runtime
 COPY --chmod=755 ./start.sh /start.sh
 
-# Health check para o Coolify
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+# Health check para o Coolify - aumentando o timeout e retries
+HEALTHCHECK --interval=30s --timeout=15s --start-period=10s --retries=5 \
   CMD curl -f http://localhost:$PORT/ || exit 1
 
 # Expor a porta (Coolify pode substituir esta porta)

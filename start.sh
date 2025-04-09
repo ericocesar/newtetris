@@ -2,9 +2,22 @@
 
 # Script de inicialização para configurar o ambiente antes de iniciar o nginx
 
+# Informações de depuração
+echo "======== AMBIENTE DE EXECUÇÃO ========"
+echo "Hostname: $(hostname)"
+echo "Endereço IP: $(hostname -I)"
+echo "Porta configurada: $PORT"
+echo "URL pública: $PUBLIC_URL"
+
 # Certifique-se de que não há configurações duplicadas
 rm -f /etc/nginx/sites-enabled/default
 rm -f /etc/nginx/sites-available/default
+
+# Criar diretórios de log se não existirem
+mkdir -p /var/log/nginx
+touch /var/log/nginx/error.log
+touch /var/log/nginx/access.log
+chmod 755 /var/log/nginx
 
 # Substituir a porta no arquivo de configuração do nginx
 sed -i "s/listen 80/listen $PORT/g" /etc/nginx/conf.d/default.conf
@@ -25,21 +38,31 @@ fi
 echo "Iniciando servidor na porta: $PORT"
 echo "URL pública configurada: $PUBLIC_URL"
 
+# Verificar conteúdo do diretório web
+echo "======== CONTEÚDO DO DIRETÓRIO WEB ========"
+ls -la /var/www/html/
+echo "==========================================="
+
 # Verificar se temos todos os arquivos necessários
 if [ ! -f /var/www/html/index.html ]; then
     echo "ERRO: Arquivo index.html não encontrado!"
     exit 1
 fi
 
-if [ ! -f /var/www/html/index.wasm ]; then
-    echo "AVISO: Arquivo index.wasm não encontrado. Verifique a exportação do Godot."
-fi
-
 # Ajustar permissões
+echo "Ajustando permissões..."
+chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html
 
 # Verificar se o nginx está configurado corretamente
+echo "Verificando configuração do Nginx..."
 nginx -t || exit 1
 
+# Verificar quais processos estão usando as portas relevantes
+echo "======== PORTAS EM USO ========"
+netstat -tulpn | grep -E ':(80|443|8080)'
+echo "=============================="
+
 # Iniciar nginx em primeiro plano
+echo "Iniciando Nginx..."
 exec nginx -g "daemon off;" 
