@@ -3,6 +3,11 @@ FROM ubuntu:20.04
 # Evitar perguntas durante a instalação
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Variáveis de ambiente para configuração do Coolify
+ENV PORT=80
+ENV HOST=0.0.0.0
+ENV PUBLIC_URL="https://tetris.host.webck.com.br"
+
 # Instalar dependências
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
@@ -11,6 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     python3 \
     nginx \
+    curl \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Instalar Godot (headless)
@@ -36,10 +42,17 @@ RUN mkdir -p /var/www/html/
 RUN godot --headless --export-debug "Web" /var/www/html/index.html
 
 # Configurar nginx
-COPY nginx.conf /etc/nginx/sites-available/default
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expor a porta 80
-EXPOSE 80
+# Script de inicialização para ajustar porta e outras configurações em runtime
+COPY --chmod=755 ./start.sh /start.sh
 
-# Iniciar nginx em primeiro plano
-CMD ["nginx", "-g", "daemon off;"] 
+# Health check para o Coolify
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:$PORT/ || exit 1
+
+# Expor a porta (Coolify pode substituir esta porta)
+EXPOSE $PORT
+
+# Iniciar o script que configura variáveis de ambiente e inicia o nginx
+CMD ["/start.sh"] 

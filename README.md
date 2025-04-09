@@ -85,4 +85,35 @@ Este jogo foi inspirado pelo clássico Tetris e outras versões competitivas com
 
 ## Licença
 
-Este projeto é licenciado sob a MIT License - veja o arquivo LICENSE para mais detalhes. # newtetris
+Este projeto é licenciado sob a MIT License - veja o arquivo LICENSE para mais detalhes.
+
+## Deploy com Coolify
+
+Este projeto está configurado para deploy usando [Coolify](https://coolify.io/), uma plataforma de hospedagem auto-hospedada e de código aberto.
+
+### Pré-requisitos para Deploy
+
+- Uma instância do Coolify configurada
+- Acesso a um repositório Git com este código
+
+### Variáveis de Ambiente para Coolify
+
+Configure as seguintes variáveis de ambiente no Coolify:
+
+- `PORT`: Porta em que o serviço será executado (padrão: 80)
+- `HOST`: Host para bind (padrão: 0.0.0.0)
+- `PUBLIC_URL`: URL pública do seu jogo (exemplo: https://tetris.seudominio.com)
+
+### Passos para Deploy
+
+1. No dashboard do Coolify, clique em "Create New Resource"
+2. Selecione "Application"
+3. Escolha a fonte do seu código (GitHub, GitLab, etc)
+4. Configure as variáveis de ambiente mencionadas acima
+5. Clique em "Deploy"
+
+O Coolify usará o Dockerfile incluído neste projeto para construir e servir o jogo automaticamente.
+
+### Healthcheck
+
+O container inclui um healthcheck que verifica a disponibilidade do serviço a cada 30 segundos, facilitando o monitoramento pelo Coolify.
