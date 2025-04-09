@@ -68,6 +68,21 @@ if [ ! -f /var/www/html/index.wasm ]; then
     exit 1
 fi
 
+# Fazer backup do arquivo index.html original
+echo "Fazendo backup do index.html original..."
+cp /var/www/html/index.html /var/www/html/index.html.orig
+
+# Adiciona headers necessários diretamente ao index.html
+echo "Modificando index.html para adicionar headers de segurança diretamente..."
+sed -i 's/<head>/<head>\n  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">\n  <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp">/g' /var/www/html/index.html
+
+# Verificar se a modificação foi aplicada
+if grep -q "Cross-Origin-Opener-Policy" /var/www/html/index.html; then
+    echo "Headers de segurança adicionados ao index.html com sucesso."
+else
+    echo "AVISO: Não foi possível adicionar headers de segurança ao index.html."
+fi
+
 # Ajustar permissões
 echo "Ajustando permissões..."
 chown -R www-data:www-data /var/www/html
@@ -82,6 +97,7 @@ chmod 644 /var/www/html/*.js
 # Verificar conteúdo do index.html
 echo "======== CONTEÚDO DO INDEX.HTML ========"
 grep -i wasm /var/www/html/index.html || echo "Nenhuma referência a WASM encontrada no index.html"
+grep -i cross-origin /var/www/html/index.html || echo "Nenhuma referência a Cross-Origin encontrada no index.html"
 echo "========================================"
 
 # Verificar se o nginx está configurado corretamente

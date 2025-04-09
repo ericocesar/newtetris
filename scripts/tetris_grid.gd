@@ -44,6 +44,8 @@ signal power_up_received(type, from_player_id)
 signal power_up_gained(type, player_id)
 signal power_up_used(type, player_id)
 signal power_up_meter_updated(value, threshold)
+signal line_cleared(num_lines)
+signal block_placed()
 
 # Inicialização
 func _ready():
