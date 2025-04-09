@@ -2,9 +2,16 @@
 
 # Script de inicialização para configurar o ambiente antes de iniciar o nginx
 
+# Certifique-se de que não há configurações duplicadas
+rm -f /etc/nginx/sites-enabled/default
+rm -f /etc/nginx/sites-available/default
+
 # Substituir a porta no arquivo de configuração do nginx
 sed -i "s/listen 80/listen $PORT/g" /etc/nginx/conf.d/default.conf
 sed -i "s/listen \[::\]:80/listen \[::\]:$PORT/g" /etc/nginx/conf.d/default.conf
+
+# Remover as flags "default_server" porque o Traefik já lida com isso
+sed -i "s/default_server//g" /etc/nginx/conf.d/default.conf
 
 # Se PUBLIC_URL estiver definido, configura o servidor_name correspondente
 if [ ! -z "$PUBLIC_URL" ]; then
@@ -30,6 +37,9 @@ fi
 
 # Ajustar permissões
 chmod -R 755 /var/www/html
+
+# Verificar se o nginx está configurado corretamente
+nginx -t || exit 1
 
 # Iniciar nginx em primeiro plano
 exec nginx -g "daemon off;" 

@@ -41,7 +41,10 @@ COPY . .
 RUN mkdir -p /var/www/html/
 RUN godot --headless --export-debug "Web" /var/www/html/index.html
 
-# Configurar nginx
+# Configurar nginx - remover configurações padrão para evitar conflitos
+RUN rm -rf /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
+
+# Copiar nossa configuração do nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Script de inicialização para ajustar porta e outras configurações em runtime
